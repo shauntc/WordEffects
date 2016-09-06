@@ -11,17 +11,28 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         char inputChars[255];
-        char userChoice;
-        int userChoiceNumber;
+        char userChoice = 1;
+        int userChoiceNumber = 0;
+        //char stringHasBeenInput = @"n";
         
-        printf("Input a string: ");
-        fgets(inputChars, 255, stdin);
+        
+        
+        
+        //initial String input
+        
+        if(userChoice == @"1")
+        {
+            printf("Input a string: ");
+            fgets(inputChars, 255, stdin);
+        }
+        
+        
         
         printf("Your string is: %s\n", inputChars);
         
         //convert to NSString and remove new line
         NSString *inputString = [NSString stringWithUTF8String:inputChars];
-        inputString = [inputString substringToIndex:[inputString length]-1];
+        inputString = [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         NSLog(@"Your input string was %@", inputString);
         
@@ -51,22 +62,31 @@ int main(int argc, const char * argv[]) {
         {
             //Make UPPER CASE
             case 1:
-                NSLog(@"%@", [inputString uppercaseString]);
+                inputString = [inputString uppercaseString];
+                NSLog(@"Resulting string: %@", inputString);
                 break;
                 
             //Make lower case
             case 2:
-                NSLog(@"%@", [inputString lowercaseString]);
+                inputString = [inputString lowercaseString];
+                NSLog(@"Resulting string: %@", inputString);
                 break;
                 
             //Numberize
             case 3:
-                NSLog(@"Numberize!");
+                if([inputString intValue]!=0 || [inputString  isEqual: @"0"])
+                {
+                NSLog(@"%d", [inputString intValue]);
+                }
+                else
+                {
+                    NSLog(@"String is not an integer");
+                }
                 break;
                 
             //Canadianize
             case 4:
-                NSLog(@"%@", [inputString stringByAppendingString:@", eh?"]);
+                inputString = [inputString stringByAppendingString:@", eh?"];
                 break;
                 
             //Respond
@@ -85,17 +105,27 @@ int main(int argc, const char * argv[]) {
                 }
                 break;
             
-                //De-Space
+            //De-Space
             case 6:
-                NSLog(@"De-Space it");
+                inputString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+                NSLog(@"Resulting string: %@", inputString);
                 break;
-                
+            
+            //If it gets to default it indicates a problem
             default:
-                NSLog(@"Something went wrong, get to default case");
+                NSLog(@"Something went wrong, switch got to default case");
         }
-
         
-                
+        NSLog("What would you like to do?/n1)Input a new string/n2)Do another operation on this string/n3)Exit/n");
+        
+        fgets(userChoice,2,stdin);
+        
+        
+        if 
+        
+        
+        
+        
         
         
         
