@@ -20,7 +20,7 @@ int main(int argc, const char * argv[]) {
         {
         
             
-        //String input
+        //String input (happens initialy as well as if the user chooses to use a new string at the end of the program)
         if(userChoice == '1')
         {
             printf("Input a string: ");
@@ -43,9 +43,10 @@ int main(int argc, const char * argv[]) {
         NSLog(@"The string you're working with is: %@", inputString);
         
         
+        //Allow user to choose type of operation
+        NSLog(@"What would you like to do with your string? \n1)Uppercase \n2)Lowercase\n3)Numberize\n4)Canadianize\n5)Respond\n6)De-Space\n");
         do{
         
-            NSLog(@"What would you like to do with your string? \n1)Uppercase \n2)Lowercase\n3)Numberize\n4)Canadianize\n5)Respond\n6)De-Space\n");
             do
             {
                 fgets(&userChoice,2,stdin);
@@ -59,13 +60,14 @@ int main(int argc, const char * argv[]) {
             
             if(6 < userChoiceNumber || userChoiceNumber < 1)
             {
-                NSLog(@"Invalid input, please enter a number between 1 and 6\n");
+                NSLog(@"Please enter a valid choice");
             }
             
             
         
         }while(6 < userChoiceNumber || userChoiceNumber < 1);
-        
+       
+       //Sends user to chosen operation
        switch (userChoiceNumber)
         {
             //Make UPPER CASE
@@ -84,7 +86,7 @@ int main(int argc, const char * argv[]) {
             case 3:
                 if([inputString intValue]!=0 || [inputString  isEqual: @"0"])
                 {
-                NSLog(@"%d", [inputString intValue]);
+                NSLog(@"Integer Value:%d", [inputString intValue]);
                 }
                 else
                 {
@@ -125,6 +127,7 @@ int main(int argc, const char * argv[]) {
                 NSLog(@"Something went wrong, switch got to default case");
         }
         
+        //Asks user how to proceed
         NSLog(@"What would you like to do?\n1)Input a new string\n2)Do another operation on the resultant string\n3)Exit\n");
         
         do
