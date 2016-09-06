@@ -19,7 +19,10 @@ int main(int argc, const char * argv[]) {
         
         printf("Your string is: %s\n", inputChars);
         
+        //convert to NSString and remove new line
         NSString *inputString = [NSString stringWithUTF8String:inputChars];
+        inputString = [inputString substringToIndex:[inputString length]-1];
+        
         NSLog(@"Your input string was %@", inputString);
         
         
