@@ -11,37 +11,45 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         char inputChars[255];
-        char userChoice = 1;
+        char userChoice = '1';
         int userChoiceNumber = 0;
-        //char stringHasBeenInput = @"n";
+        NSString *inputString = [[NSString alloc] init];
         
         
+        while(YES)
+        {
         
-        
-        //initial String input
-        
-        if(userChoice == @"1")
+            
+        //String input
+        if(userChoice == '1')
         {
             printf("Input a string: ");
-            fgets(inputChars, 255, stdin);
+            do
+            {
+                fgets(inputChars, 255, stdin);
+            }while(inputChars[0] == '\n');
+            
+            printf("Your input characters are: %s\n", inputChars);
+            
+            //convert to NSString and remove new line
+            inputString = [NSString stringWithUTF8String:inputChars];
+            inputString = [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
         }
         
         
         
-        printf("Your string is: %s\n", inputChars);
         
-        //convert to NSString and remove new line
-        NSString *inputString = [NSString stringWithUTF8String:inputChars];
-        inputString = [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSLog(@"Your input string was %@", inputString);
+        NSLog(@"The string you're working with is: %@", inputString);
         
         
         do{
         
             NSLog(@"What would you like to do with your string? \n1)Uppercase \n2)Lowercase\n3)Numberize\n4)Canadianize\n5)Respond\n6)De-Space\n");
-            fgets(&userChoice, 2, stdin);
-        
+            do
+            {
+                fgets(&userChoice,2,stdin);
+            }while(userChoice == '\n');
         
            // NSLog(@"%c", userChoice);
             
@@ -80,13 +88,14 @@ int main(int argc, const char * argv[]) {
                 }
                 else
                 {
-                    NSLog(@"String is not an integer");
+                    NSLog(@"String does not begin with an integer");
                 }
                 break;
                 
             //Canadianize
             case 4:
                 inputString = [inputString stringByAppendingString:@", eh?"];
+                NSLog(@"Resulting string: %@", inputString);
                 break;
                 
             //Respond
@@ -116,19 +125,34 @@ int main(int argc, const char * argv[]) {
                 NSLog(@"Something went wrong, switch got to default case");
         }
         
-        NSLog("What would you like to do?/n1)Input a new string/n2)Do another operation on this string/n3)Exit/n");
+        NSLog(@"What would you like to do?\n1)Input a new string\n2)Do another operation on the resultant string\n3)Exit\n");
         
-        fgets(userChoice,2,stdin);
+        do
+        {
+            do
+            {
+                fgets(&userChoice,2,stdin);
+            }while(userChoice == '\n');
+                
+            if('1'>userChoice || userChoice>'3')
+            {
+                NSLog(@"Please input a valid choice");
+            }
+            
+            
+        }while('1'>userChoice || userChoice>'3');
+        
+        if(userChoice=='3')
+        {
+            return 0;
+        }
         
         
-        if 
         
         
         
-        
-        
-        
-        
+    }
+    
     }
     return 0;
 }
